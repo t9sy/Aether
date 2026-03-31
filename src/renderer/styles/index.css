@@ -1,0 +1,400 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   AURA BROWSER — THEME SYSTEM (CSS Variables)
+   ============================================ */
+
+/* Deep Night (Default) */
+[data-theme='deep-night'] {
+  --bg: #0a0a0f;
+  --surface: rgba(20, 20, 35, 0.85);
+  --surface-hover: rgba(30, 30, 50, 0.95);
+  --text: #e8e8f0;
+  --text-secondary: #8888aa;
+  --accent: #6c5ce7;
+  --accent-hover: #7f70f0;
+  --border: rgba(108, 92, 231, 0.2);
+  --sidebar: rgba(12, 12, 22, 0.75);
+  --topbar: rgba(14, 14, 25, 0.82);
+  --glow: rgba(108, 92, 231, 0.15);
+  --input-bg: rgba(25, 25, 45, 0.9);
+  --btn-hover: rgba(108, 92, 231, 0.15);
+  --scrollbar: rgba(108, 92, 231, 0.3);
+  --shadow: rgba(0, 0, 0, 0.4);
+  --icon: #e8e8f0;
+}
+
+/* Aether Light */
+[data-theme='aura-light'] {
+  --bg: #f4f2f7;
+  --surface: rgba(255, 255, 255, 0.82);
+  --surface-hover: rgba(255, 255, 255, 0.95);
+  --text: #1a1a2e;
+  --text-secondary: #6b6b8d;
+  --accent: #7c5cfc;
+  --accent-hover: #6a4de8;
+  --border: rgba(124, 92, 252, 0.18);
+  --sidebar: rgba(255, 255, 255, 0.65);
+  --topbar: rgba(255, 255, 255, 0.72);
+  --glow: rgba(124, 92, 252, 0.1);
+  --input-bg: rgba(240, 238, 245, 0.95);
+  --btn-hover: rgba(124, 92, 252, 0.1);
+  --scrollbar: rgba(124, 92, 252, 0.25);
+  --shadow: rgba(0, 0, 0, 0.08);
+  --icon: #1a1a2e;
+}
+
+/* Cyberpunk Purple */
+[data-theme='cyberpunk'] {
+  --bg: #0d0015;
+  --surface: rgba(25, 5, 50, 0.88);
+  --surface-hover: rgba(40, 10, 70, 0.95);
+  --text: #f0e0ff;
+  --text-secondary: #b080d0;
+  --accent: #e040fb;
+  --accent-hover: #ea60ff;
+  --border: rgba(224, 64, 251, 0.25);
+  --sidebar: rgba(15, 2, 30, 0.8);
+  --topbar: rgba(18, 3, 35, 0.85);
+  --glow: rgba(224, 64, 251, 0.15);
+  --input-bg: rgba(30, 8, 55, 0.92);
+  --btn-hover: rgba(224, 64, 251, 0.15);
+  --scrollbar: rgba(224, 64, 251, 0.35);
+  --shadow: rgba(0, 0, 0, 0.5);
+  --icon: #f0e0ff;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Force icon color inheritance */
+svg {
+  color: inherit;
+}
+
+/* ============================================
+   GLASSMORPHISM UTILITIES
+   ============================================ */
+
+.glass {
+  background: var(--surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+}
+
+.glass-sidebar {
+  background: var(--sidebar);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-right: 1px solid var(--border);
+}
+
+.glass-topbar {
+  background: var(--topbar);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ============================================
+   TAB BAR
+   ============================================ */
+
+.tab-bar {
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-item {
+  user-select: none;
+}
+
+/* ============================================
+   ZEN SIDEBAR (Compact)
+   ============================================ */
+
+.zen-sidebar {
+  user-select: none;
+}
+
+.zen-rail {
+  border-right: none !important;
+}
+
+.zen-panel {
+  border-left: 1px solid var(--border) !important;
+  border-right: 1px solid var(--border) !important;
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+@keyframes slideOut {
+  from { transform: translateX(0);     opacity: 1; }
+  to   { transform: translateX(-100%); opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px var(--glow); }
+  50%      { box-shadow: 0 0 20px var(--glow), 0 0 40px var(--glow); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-6px); }
+}
+
+.sidebar-enter {
+  animation: slideIn 0.2s ease-out forwards;
+}
+
+.sidebar-exit {
+  animation: slideOut 0.15s ease-in forwards;
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+@keyframes slideInBottomLeft {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.slide-in-bottom-left {
+  animation: slideInBottomLeft 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: bottom left;
+}
+
+/* ============================================
+   DRAG REGION (for frameless window)
+   ============================================ */
+
+.drag-region {
+  -webkit-app-region: drag;
+  app-region: drag;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+  app-region: no-drag;
+}
+
+/* ============================================
+   WEBVIEW
+   ============================================ */
+
+webview {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: white;
+}
+
+/* ============================================
+   NEW TAB PAGE
+   ============================================ */
+
+.newtab-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.newtab-page::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  pointer-events: none;
+  animation: glow-pulse 6s ease-in-out infinite;
+}
+
+.newtab-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  z-index: 1;
+  max-width: 560px;
+  width: 100%;
+  padding: 0 24px;
+}
+
+.newtab-logo {
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.newtab-title {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+
+.newtab-subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+
+.newtab-search {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  backdrop-filter: blur(16px);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.newtab-search:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 16px var(--glow);
+}
+
+.newtab-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.newtab-search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.newtab-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.newtab-shortcut {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  backdrop-filter: blur(12px);
+}
+
+.newtab-shortcut:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px var(--shadow);
+}
+
+.newtab-shortcut-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.newtab-shortcut-name {
+  font-size: 10px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* ============================================
+   TRANSITIONS
+   ============================================ */
+
+.theme-transition,
+.theme-transition * {
+  transition: background-color 0.35s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
