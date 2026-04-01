@@ -208,12 +208,12 @@ Aether is a **custom browser shell** built on top of Chromium (via Electron).
 │  │  Tabs · Sidebar · Settings · Downloads    │  │
 │  │  Passwords · Bookmarks · History · Themes │  │
 │  └───────────────┬───────────────────────────┘  │
-│                  │ IPC (preload.ts)              │
+│                  │ IPC (preload.ts)             │
 │  ┌───────────────┴───────────────────────────┐  │
 │  │     Electron Main Process (Node.js)       │  │
 │  │  Window mgmt · Downloads · Permissions    │  │
 │  └───────────────┬───────────────────────────┘  │
-│                  │                               │
+│                  │                              │
 │  ┌───────────────┴───────────────────────────┐  │
 │  │        Chromium Engine (Blink + V8)       │  │
 │  │        Web page rendering & JS exec       │  │
